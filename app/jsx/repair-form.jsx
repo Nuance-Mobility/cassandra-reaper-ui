@@ -13,7 +13,7 @@ const repairForm = React.createClass({
     return {
       addRepairResultMsg: null, clusterNames: [], submitEnabled: false,
       clusterName: null, keyspace: null, tables: null, owner: null, segments: null,
-      parallism: null, intensity: null, cause: null
+      parallism: null, intensity: null, incrementalRepair: null, cause: null
     };
   },
 
@@ -48,6 +48,7 @@ const repairForm = React.createClass({
     if(this.state.parallism) repair.repairParallelism = this.state.parallism;
     if(this.state.intensity) repair.intensity = this.state.intensity;
     if(this.state.cause) repair.cause = this.state.cause;
+    if(this.state.incrementalRepair) repair.incrementalRepair = this.state.incrementalRepair;
 
     this.props.addRepairSubject.onNext(repair);
   },
@@ -138,6 +139,17 @@ const repairForm = React.createClass({
                 <input type="number" className="form-control" value={this.state.intensity}
                   min="0" max="1"
                   onChange={this._handleChange} id="in_intensity" placeholder="repair intensity"/>
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="in_incrementalRepair" className="col-sm-3 control-label">Incremental Repair</label>
+              <div className="col-sm-9 col-md-7 col-lg-5">
+                <select className="form-control" id="in_incrementalRepair"
+                  onChange={this._handleChange} value={this.state.incrementalRepair}>
+                  <option value=""></option>
+                  <option value="false">False</option>
+                  <option value="true">True</option>
+                </select>
               </div>
             </div>
             <div className="form-group">
