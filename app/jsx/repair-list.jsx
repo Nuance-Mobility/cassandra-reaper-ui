@@ -115,6 +115,10 @@ const TableRowDetails = React.createClass({
                     <td>Creation time</td>
                     <td>{createdAt}</td>
                 </tr>
+                <tr>
+                    <td>Days To Expire After DONE</td>
+                    <td>{this.props.row.days_to_expire_after_done}</td>
+                </tr>
             </tbody>
           </table>
         </td>

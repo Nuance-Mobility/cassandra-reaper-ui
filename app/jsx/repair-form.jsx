@@ -13,7 +13,8 @@ const repairForm = React.createClass({
     return {
       addRepairResultMsg: null, clusterNames: [], submitEnabled: false,
       clusterName: null, keyspace: null, tables: null, owner: null, segments: null,
-      parallism: null, intensity: null, incrementalRepair: null, cause: null
+      parallism: null, intensity: null, incrementalRepair: null, cause: null,
+      daysToExpireAfterDone: null
     };
   },
 
@@ -49,6 +50,7 @@ const repairForm = React.createClass({
     if(this.state.intensity) repair.intensity = this.state.intensity;
     if(this.state.cause) repair.cause = this.state.cause;
     if(this.state.incrementalRepair) repair.incrementalRepair = this.state.incrementalRepair;
+    if(this.state.daysToExpireAfterDone) repair.daysToExpireAfterDone = this.state.daysToExpireAfterDone;
 
     this.props.addRepairSubject.onNext(repair);
   },
@@ -150,6 +152,13 @@ const repairForm = React.createClass({
                   <option value="false">False</option>
                   <option value="true">True</option>
                 </select>
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="in_daysToExpireAfterDone" className="col-sm-3 control-label">Days To Expire After Done</label>
+              <div className="col-sm-9 col-md-7 col-lg-5">
+                <input type="number" required className="form-control" value={this.state.daysToExpireAfterDone}
+                  onChange={this._handleChange} id="in_daysToExpireAfterDone" placeholder="amount of days to wait after a repair run is completed before removing it, (e.g. 2 days adter run is completed, dedault=2)"/>
               </div>
             </div>
             <div className="form-group">
